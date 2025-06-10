@@ -71,6 +71,12 @@
     </div>
 
     <div class="step">
+        <h5>Buat storage link: </h5>
+        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
+        <pre>php artisan storage:link</pre>
+    </div>
+
+    <div class="step">
         <h5>Buat controller untuk Main: </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
         <pre>php artisan make:controller MainController</pre>
@@ -193,7 +199,7 @@ Route::get('/', [HomeController::class, 'home']);
 
 Route::get('/home', [HomeController::class, 'home']);
 
-Route::get('/buku', [BukuController::class, 'index'])-&gt;middleware(CekLogin::class);
+Route::get('/buku', [BukuController::class, 'index']);
 Route::get('/tambahBuku', [BukuController::class, 'tambah']);
 Route::post('/kirimBuku', [BukuController::class, 'kirim']);
 Route::get('/editBuku/{id}', [BukuController::class, 'edit']);
@@ -216,7 +222,7 @@ Route::post('/cetak-bukupenerbit', [BukuController::class, 'cetakBukuPenerbit'])
     <div class="step">
         <h5>Buat migration untuk table penerbit: </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:migration CreateTablePenerbitr</pre>
+        <pre>php artisan make:migration CreateTablePenerbit</pre>
     </div>
 
     <div class="step">
@@ -298,6 +304,12 @@ return new class extends Migration
     }
 };
     </pre>
+    </div>
+
+    <div class="step">
+        <h5>Buat migrasi buku: </h5>
+        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
+        <pre>php artisan migrate</pre>
     </div>
 
     <div class="step">
@@ -403,8 +415,6 @@ class PenerbitController extends Controller
         $validasi = $request->validate([
             'nama_penerbit' => 'required'
         ]);
-        $path = $request->file('cover')->storePublicly('penerbit', 'public');
-        $validasi['cover'] = $path;
 
         Penerbit::insert($validasi);
 
@@ -559,7 +569,6 @@ class BukuController extends Controller
             &lt;tr&gt;
                 &lt;th&gt;No&lt;/th&gt;
                 &lt;th&gt;Nama Penerbit&lt;/th&gt;
-                &lt;th&gt;Cover&lt;/th&gt;
                 &lt;th&gt;Action&lt;/th&gt;
             &lt;/tr&gt;
         &lt;/thead&gt;
@@ -568,9 +577,6 @@ class BukuController extends Controller
                 &lt;tr&gt;
                     &lt;td&gt;{{ $loop->iteration }}&lt;/td&gt;
                     &lt;td&gt;{{ $row->nama_penerbit }}&lt;/td&gt;
-                    &lt;td&gt;
-                        &lt;img class="img-thumbnail" width="50" src="{{ asset('storage/'.$row->cover) }}" alt="coverPenerbit"&gt;
-                    &lt;/td&gt;
                     &lt;td&gt;
                         &lt;a href="/bukuPenerbit/{{ $row->id_penerbit }}" class="btn btn-sm btn-secondary"&gt;Lihat&lt;/a&gt; | 
                         &lt;a href="/editPenerbit/{{ $row->id_penerbit }}" class="btn btn-sm btn-warning"&gt;Edit&lt;/a&gt; | 
@@ -611,7 +617,6 @@ class BukuController extends Controller
         &lt;form action="/kirimPenerbit" method="post" enctype="multipart/form-data"&gt;
             @csrf
             &lt;input type="text" class="form-control mb-4" name="nama_penerbit" placeholder="Nama Penerbit"&gt;
-            &lt;input type="file" class="form-control mb-4" name="cover" placeholder="Cover"&gt;
             &lt;button type="submit"&gt;Tambah&lt;/button&gt;
         &lt;/form&gt;
     &lt;/div&gt;
@@ -656,7 +661,7 @@ class BukuController extends Controller
         <pre>
 @extends('main')
 @section('content')
-    &lt;h1&gt;{{ $content }}&gt;&lt;/h1&gt;
+    &lt;h1&gt;{{ $content }}&lt;/h1&gt;
     &lt;h2&gt;Daftar Buku&lt;/h2&gt;
     &lt;a href="/tambahBuku" class="btn btn-sm btn-success m-2"&gt;Tambah Buku&lt;/a&gt;
     &lt;table class="table table-bordered"&gt;
@@ -704,7 +709,7 @@ class BukuController extends Controller
         <pre>
 @extends('main')
 @section('content')
-    &lt;h1&gt;{{ $content }}&gt;&lt;/h1&gt;
+    &lt;h1&gt;{{ $content }}&lt;/h1&gt;
     &lt;div class="container"&gt;
 
         @if ($errors-&gt;any())
@@ -744,7 +749,7 @@ class BukuController extends Controller
         <pre>
 @extends('main')
 @section('content')
-    &lt;h1&gt;{{ $content }}&gt;&lt;/h1&gt;
+    &lt;h1&gt;{{ $content }}&lt;/h1&gt;
     &lt;div class="container"&gt;
 
         @if ($errors-&gt;any())
@@ -791,7 +796,7 @@ class BukuController extends Controller
         <pre>
 @extends('main')
 @section('content')
-    &lt;h1&gt;{{ $content }}&gt;&lt;/h1&gt;
+    &lt;h1&gt;{{ $content }}&lt;/h1&gt;
     &lt;h2&gt;Oleh Penerbit: {{ $penerbit-&gt;nama_penerbit }}&lt;/h2&gt;
     &lt;div class="m-2"&gt;
         &lt;form action="/cetak-bukupenerbit" method="post"&gt;
