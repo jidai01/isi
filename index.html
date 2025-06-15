@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Langkah-langkah bisa lulus Ujian Pemrograman Web II</title>
+    <title>Ujian Pemrograman Web II</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,38 +42,37 @@
 
 <body>
 
-    <h1>Langkah-langkah bisa lulus ujian Pemrograman Web II</h1>
+    <h1>Ujian Pemrograman Web II</h1>
 
     <div class="step">
-        <h5>Jalankan XAMPP dan Visual Studio Code</h5>
+        <h5>Buka folder "htdocs" atau folder pilihan lain</h5>
+        <h5>Jalankan XAMPP</h5>
     </div>
 
     <div class="step">
-        <h5>Buat project baru: </h5>
+        <h5>Klik kanan pada mouse, lalu pilih "Open in Terminal" untuk membuat project baru: </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
         <pre>laravel new nama_project</pre>
     </div>
 
     <div class="step">
-        <h5>Buat database di localhost/phpmyadmin dengan nama database mengikuti nama_project jika belum ada database di localhost/phpMyAdmin</h5>
+        <h5>Buat project baru secara detail (pastikan XAMPP sudah berjalan dan diaktifkan): </h5>
+        <h5>1. Setelah "laravel new nama_project" lalu tekan ENTER, akan muncul pertanyaan berikut:</h5>
+        <h5>"Which starter kit would you like to install? [None]" => Tekan ENTER</h5>
+        <h5>2. Setelah itu akan muncul pertanyaan berikut:</h5>
+        <h5>"Which database will your application use? [SQLite]" => Ketik "mysql" lalu tekan ENTER</h5>
+        <h5>3. Setelah itu akan muncul pertanyaan berikut:</h5>
+        <h5>"Default database updated. Would you like to run the default database migrations? (yes/no) [yes]" => Tekan ENTER</h5>
+        <h5>4. Setelah itu akan muncul pertanyaan berikut:</h5>
+        <h5>"Would you like to run npm install and npm run build? (yes/no) [yes]" => Tekan ENTER</h5>
+        <h5>5. Seharusnya project Laravel sudah berhasil dibuat. Buka project dengan:</h5>
+        <h5>"code nama_project" atau "Open Folder" di Visual Studio Code</h5>
     </div>
 
     <div class="step">
         <h5>Buat migrasi umum: </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
         <pre>php artisan migrate</pre>
-    </div>
-
-    <div class="step">
-        <h5>Install DomPDF: </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>composer require barryvdh/laravel-dompdf</pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat storage link: </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan storage:link</pre>
     </div>
 
     <div class="step">
@@ -101,7 +100,7 @@ class MainController extends Controller
     </div>
 
     <div class="step">
-        <h5>Buat view untuk main: </h5>
+        <h5>Buat view untuk main (main.blade.php): </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
         <pre>&lt;!doctype html&gt;
 &lt;html lang="en"&gt;
@@ -117,7 +116,7 @@ class MainController extends Controller
 &lt;body&gt;
     &lt;nav class="navbar navbar-expand-lg bg-primary"&gt;
         &lt;div class="container-fluid"&gt;
-            &lt;a class="navbar-brand text-white" href="/home"&gt;Navbar&lt;/a&gt;
+            &lt;a class="navbar-brand text-white" href="/"&gt;Navbar&lt;/a&gt;
             &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"&gt;
@@ -126,13 +125,13 @@ class MainController extends Controller
             &lt;div class="collapse navbar-collapse" id="navbarSupportedContent"&gt;
                 &lt;ul class="navbar-nav me-auto mb-2 mb-lg-0"&gt;
                     &lt;li class="nav-item"&gt;
-                        &lt;a class="nav-link active text-white" aria-current="page" href="/home"&gt;Home&lt;/a&gt;
+                        &lt;a class="nav-link active text-white" aria-current="page" href="/"&gt;Home&lt;/a&gt;
                     &lt;/li&gt;
                     &lt;li class="nav-item"&gt;
-                        &lt;a class="nav-link text-white" href="/penerbit"&gt;Penerbit&lt;/a&gt;
+                        &lt;a class="nav-link text-white" href="/prodi"&gt;Prodi&lt;/a&gt;
                     &lt;/li&gt;
                     &lt;li class="nav-item"&gt;
-                        &lt;a class="nav-link text-white" href="/buku"&gt;Buku&lt;/a&gt;
+                        &lt;a class="nav-link text-white" href="/mahasiswa"&gt;Mahasiswa&lt;/a&gt;
                     &lt;/li&gt;
                 &lt;/ul&gt;
             &lt;/div&gt;
@@ -175,7 +174,7 @@ class HomeController extends Controller
     </div>
 
     <div class="step">
-        <h5>Buat view untuk home: </h5>
+        <h5>Buat view untuk home (home.blade.php): </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
         <pre>
 @extends('main')
@@ -190,39 +189,34 @@ class HomeController extends Controller
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
         <pre>&lt;?php
 
-use App\Http\Controllers\BukuController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PenerbitController;
+use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\ProdiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home']);
 
-Route::get('/home', [HomeController::class, 'home']);
+Route::get('/prodi', [ProdiController::class, 'index']);
+Route::get('/tambahProdi', [ProdiController::class, 'tambah']);
+Route::post('/kirimProdi', [ProdiController::class, 'kirim']);
+Route::get('/editProdi/{id}', [ProdiController::class, 'edit']);
+Route::post('/updateProdi', [ProdiController::class, 'update']);
+Route::get('/deleteProdi/{id}', [ProdiController::class, 'delete']);
 
-Route::get('/buku', [BukuController::class, 'index']);
-Route::get('/tambahBuku', [BukuController::class, 'tambah']);
-Route::post('/kirimBuku', [BukuController::class, 'kirim']);
-Route::get('/editBuku/{id}', [BukuController::class, 'edit']);
-Route::post('/updateBuku', [BukuController::class, 'update']);
-Route::get('/deleteBuku/{id}', [BukuController::class, 'delete']);
+Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
+Route::get('/tambahMahasiswa', [MahasiswaController::class, 'tambah']);
+Route::post('/kirimMahasiswa', [MahasiswaController::class, 'kirim']);
+Route::get('/editMahasiswa/{id}', [MahasiswaController::class, 'edit']);
+Route::post('/updateMahasiswa', [MahasiswaController::class, 'update']);
+Route::get('/deleteMahasiswa/{id}', [MahasiswaController::class, 'delete']);
 
-Route::get('/penerbit', [PenerbitController::class, 'index']);
-Route::get('/tambahPenerbit', [PenerbitController::class, 'tambah']);
-Route::post('/kirimPenerbit', [PenerbitController::class, 'kirim']);
-Route::get('/editPenerbit/{id}', [PenerbitController::class, 'edit']);
-Route::post('/updatePenerbit', [PenerbitController::class, 'update']);
-Route::get('/deletePenerbit/{id}', [PenerbitController::class, 'delete']);
-
-Route::get('/bukuPenerbit/{id}', [BukuController::class, 'byPenerbit']);
-
-Route::post('/cetak-bukupenerbit', [BukuController::class, 'cetakBukuPenerbit']);
     </pre>
     </div>
 
     <div class="step">
-        <h5>Buat migration untuk table penerbit: </h5>
+        <h5>Buat migration untuk table Prodi: </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:migration CreateTablePenerbit</pre>
+        <pre>php artisan make:migration CreateTableProdi</pre>
     </div>
 
     <div class="step">
@@ -240,9 +234,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('penerbit', function (Blueprint $table) {
-            $table-&gt;id('id_penerbit');
-            $table-&gt;string('nama_penerbit');
+        Schema::create('Prodi', function (Blueprint $table) {
+            $table->id('prodi_id');
+            $table->string('prodi_nama');
         });
     }
 
@@ -251,22 +245,22 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('penerbit');
+        Schema::dropIfExists('Prodi');
     }
 };
     </pre>
     </div>
 
     <div class="step">
-        <h5>Buat migrasi penerbit: </h5>
+        <h5>Lakukan migrasi Prodi (WAJIB): </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
         <pre>php artisan migrate</pre>
     </div>
 
     <div class="step">
-        <h5>Buat migration untuk table buku: </h5>
+        <h5>Buat migration untuk table Mahasiswa: </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:migration CreateTableBuku</pre>
+        <pre>php artisan make:migration CreateTableMahasiswa</pre>
     </div>
 
     <div class="step">
@@ -284,14 +278,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('buku', function (Blueprint $table) {
-            $table-&gt;id('id_buku');
-            $table-&gt;string('judul');
-            $table-&gt;unsignedBigInteger('id_penerbit');
-            $table-&gt;foreign('id_penerbit')-&gt;references('id_penerbit')-&gt;on('penerbit');
-            $table-&gt;year('tahun');
-            $table-&gt;text('deskripsi');
-            $table-&gt;string('cover');
+        Schema::create('Mahasiswa', function (Blueprint $table) {
+            $table-&gt;id('NIM');
+            $table-&gt;string('nama');
+            $table-&gt;string('jeniskelamin');
+            $table-&gt;unsignedBigInteger('prodi_id');
+            $table-&gt;foreign('prodi_id')-&gt;references('prodi_id')-&gt;on('Prodi');
+            $table-&gt;string('notelp');
         });
     }
 
@@ -300,22 +293,22 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('buku');
+        Schema::dropIfExists('Mahasiswa');
     }
 };
     </pre>
     </div>
 
     <div class="step">
-        <h5>Buat migrasi buku: </h5>
+        <h5>Buat migrasi Mahasiswa (WAJIB): </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
         <pre>php artisan migrate</pre>
     </div>
 
     <div class="step">
-        <h5>Buat model untuk Penerbit: </h5>
+        <h5>Buat model untuk Prodi: </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:model Penerbit</pre>
+        <pre>php artisan make:model Prodi</pre>
     </div>
 
     <div class="step">
@@ -327,26 +320,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Penerbit extends Model
+class Prodi extends Model
 {
-    protected $table = 'penerbit';
-    protected $primaryKey = 'id_penerbit';
+    protected $table = 'Prodi';
+    protected $primaryKey = 'prodi_id';
     protected $fillable = [
-        'nama_penerbit',
+        'prodi_nama',
     ];
     public $timestamps = false;
     
-    function buku() : HasMany {
-        return $this->hasMany(Buku::class, 'id_penerbit', 'id_penerbit');
+    function mahasiswa() : HasMany {
+        return $this->hasMany(Mahasiswa::class, 'prodi_id', 'prodi_id');
     }
 }
     </pre>
     </div>
 
     <div class="step">
-        <h5>Buat model untuk Buku: </h5>
+        <h5>Buat model untuk Mahasiswa: </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:model Buku</pre>
+        <pre>php artisan make:model Mahasiswa</pre>
     </div>
 
     <div class="step">
@@ -357,30 +350,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Buku extends Model
+class Mahasiswa extends Model
 {
-    protected $table = 'buku';
-    protected $primaryKey = 'id_buku';
+    protected $table = 'Mahasiswa';
+    protected $primaryKey = 'NIM';
     protected $fillable = [
-        'judul',
-        'id_penerbit',
-        'tahun',
-        'deskripsi'
+        'NIM',
+        'nama',
+        'jeniskelamin',
+        'prodi_id',
+        'notelp'
     ];
     public $timestamps = false;
 
-    public function penerbit()
+    public function prodi()
     {
-        return $this->belongsTo(Penerbit::class, 'id_penerbit', 'id_penerbit');
+        return $this->belongsTo(Prodi::class, 'prodi_id', 'prodi_id');
     }
 }
     </pre>
     </div>
 
     <div class="step">
-        <h5>Buat controller untuk Penerbit: </h5>
+        <h5>Buat controller untuk Prodi: </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:controller PenerbitController</pre>
+        <pre>php artisan make:controller ProdiController</pre>
     </div>
 
     <div class="step">
@@ -389,73 +383,73 @@ class Buku extends Model
 
 namespace App\Http\Controllers;
 
-use App\Models\Penerbit;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
-class PenerbitController extends Controller
+class ProdiController extends Controller
 {
     public function index()
     {
-        $title = "Penerbit";
-        $content = "Ini halaman Penerbit dari controller";
-        $penerbit = Penerbit::all();
-        return view('penerbit', compact('title', 'content', 'penerbit'));
+        $title = "Prodi";
+        $content = "Ini halaman Prodi dari controller";
+        $prodi = Prodi::all();
+        return view('prodi', compact('title', 'content', 'prodi'));
     }
 
     public function tambah()
     {
-        $title = "Tambah Penerbit";
-        $content = "Ini halaman Tambah Penerbit dari controller";
-        return view('tambahPenerbit', compact('title', 'content'));
+        $title = "Tambah Prodi";
+        $content = "Ini halaman Tambah Prodi dari controller";
+        return view('tambahProdi', compact('title', 'content'));
     }
 
     public function kirim(Request $request): RedirectResponse
     {
         $validasi = $request->validate([
-            'nama_penerbit' => 'required'
+            'prodi_nama' => 'required'
         ]);
 
-        Penerbit::insert($validasi);
+        Prodi::insert($validasi);
 
-        return redirect('/penerbit');
+        return redirect('/prodi');
     }
 
     public function update(Request $request): RedirectResponse
     {
-        $id_penerbit = $request->id_penerbit;
+        $prodi_id = $request->prodi_id;
 
         $validasi = $request->validate([
-            'nama_penerbit' => 'required'
+            'prodi_nama' => 'required'
         ]);
 
-        Penerbit::where('id_penerbit', $id_penerbit)->update($validasi);
+        Prodi::where('prodi_id', $prodi_id)->update($validasi);
 
-        return redirect('/penerbit');
+        return redirect('/prodi');
     }
 
     public function edit($id)
     {
-        $title = "Edit Penerbit";
-        $content = "Ini halaman Edit Penerbit dari controller";
-        $penerbit = Penerbit::find($id);
+        $title = "Edit Prodi";
+        $content = "Ini halaman Edit Prodi dari controller";
+        $prodi = Prodi::find($id);
 
-        return view('editPenerbit', compact('title', 'content', 'penerbit'));
+        return view('editProdi', compact('title', 'content', 'prodi'));
     }
 
     public function delete($id): RedirectResponse
     {
-        Penerbit::where('id_penerbit', $id)->delete();
-        return redirect('/penerbit');
+        Prodi::where('prodi_id', $id)->delete();
+        return redirect('/prodi');
     }
 }
     </pre>
     </div>
 
     <div class="step">
-        <h5>Buat controller untuk Buku: </h5>
+        <h5>Buat controller untuk Mahasiswa: </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:controller BukuController</pre>
+        <pre>php artisan make:controller MahasiswaController</pre>
     </div>
 
     <div class="step">
@@ -465,127 +459,110 @@ class PenerbitController extends Controller
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Buku;
-use App\Models\Penerbit;
+use App\Models\Mahasiswa;
+use App\Models\Prodi;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\RedirectResponse;
 
-class BukuController extends Controller
+class MahasiswaController extends Controller
 {
     public function index()
     {
-        $title = "Buku";
-        $content = "Ini halaman Buku dari controller";
-        $buku = Buku::all();
-        return view('buku', compact('title', 'content', 'buku'));
+        $title = "Mahasiswa";
+        $content = "Ini halaman Mahasiswa dari controller";
+        $mahasiswa = Mahasiswa::all();
+        return view('mahasiswa', compact('title', 'content', 'mahasiswa'));
     }
 
     public function tambah()
     {
-        $title = "Tambah Buku";
-        $content = "Ini halaman Tambah Buku dari controller";
-        $penerbitlist = Penerbit::all();
-        return view('tambahBuku', compact('title', 'content', 'penerbitlist'));
+        $title = "Tambah Mahasiswa";
+        $content = "Ini halaman Tambah Mahasiswa dari controller";
+        $prodilist = Prodi::all();
+        return view('tambahMahasiswa', compact('title', 'content', 'prodilist'));
     }
 
     public function kirim(Request $request): RedirectResponse
     {
         $validasi = $request->validate([
-            'judul' => 'required|unique:buku,judul',
-            'id_penerbit' => 'required',
-            'tahun' => 'required|integer',
-            'deskripsi' => 'required'
+            'NIM' => 'required|unique:mahasiswa,NIM',
+            'nama' => 'required',
+            'jeniskelamin' => 'required',
+            'prodi_id' => 'required',
+            'notelp' => 'required'
         ]);
-        $path = $request->file('cover')->storePublicly('buku', 'public');
-        $validasi['cover'] = $path;
 
-        Buku::insert($validasi);
+        Mahasiswa::insert($validasi);
 
-        return redirect('/buku');
+        return redirect('/mahasiswa');
     }
 
     public function update(Request $request): RedirectResponse
     {
-        $id_buku = $request->id_buku;
+        $NIM = $request->NIM;
 
         $validasi = $request->validate([
-            'judul' => 'required|unique:buku,judul,' . $id_buku . ',id_buku',
-            'id_penerbit' => 'required',
-            'tahun' => 'required|integer',
-            'deskripsi' => 'required'
+            'nama' => 'required',
+            'jeniskelamin' => 'required',
+            'prodi_id' => 'required',
+            'notelp' => 'required'
         ]);
 
-        Buku::where('id_buku', $id_buku)->update($validasi);
+        Mahasiswa::where('NIM', $NIM)->update($validasi);
 
-        return redirect('/buku');
+        return redirect('/mahasiswa');
     }
 
     public function edit($id)
     {
-        $title = "Edit Buku";
-        $content = "Ini halaman Edit Buku dari controller";
-        $buku = Buku::find($id);
+        $title = "Edit Mahasiswa";
+        $content = "Ini halaman Edit Mahasiswa dari controller";
+        $mahasiswa = Mahasiswa::find($id);
 
-        $penerbitlist = Penerbit::all();
+        $prodilist = Prodi::all();
 
-        return view('editBuku', compact('title', 'content', 'buku', 'penerbitlist'));
+        return view('editMahasiswa', compact('title', 'content', 'mahasiswa', 'prodilist'));
     }
 
     public function delete($id): RedirectResponse
     {
-        Buku::where('id_buku', $id)->delete();
-        return redirect('/buku');
-    }
-
-    public function byPenerbit($id) {
-        $title = "Buku Penerbit";
-        $content = "Ini halaman Buku Penerbit dari controller";
-        $penerbit = Penerbit::find($id);
-
-        return view('bukuPenerbit', compact('title', 'content', 'penerbit'));
-    }
-
-    function cetakBukuPenerbit(Request $request) {
-        $id_penerbit = $request->id_penerbit;
-        $buku = Buku::where('id_penerbit', $id_penerbit)->get();
-        $pdf = Pdf::loadview('bukupenerbitpdf', compact('buku'));
-        return $pdf->download();
+        Mahasiswa::where('NIM', $id)->delete();
+        return redirect('/mahasiswa');
     }
 }
     </pre>
     </div>
 
     <div class="step">
-        <h5>Buat view untuk Penerbit: </h5>
+        <h5>Buat view untuk Prodi (prodi.blade.php): </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
         <pre>
 @extends('main')
 @section('content')
     &lt;h1&gt;{{ $content }}&lt;/h1&gt;
-    &lt;h2&gt;Daftar Penerbit&lt;/h2&gt;
-    &lt;a href="/tambahPenerbit" class="btn btn-sm btn-success m-2"&gt;Tambah Penerbit&lt;/a&gt;
+    &lt;h2&gt;Daftar Prodi&lt;/h2&gt;
+    &lt;a href="/tambahProdi" class="btn btn-sm btn-success m-2"&gt;Tambah Prodi&lt;/a&gt;
     &lt;table class="table table-bordered"&gt;
         &lt;thead&gt;
             &lt;tr&gt;
                 &lt;th&gt;No&lt;/th&gt;
-                &lt;th&gt;Nama Penerbit&lt;/th&gt;
+                &lt;th&gt;Nama Prodi&lt;/th&gt;
                 &lt;th&gt;Action&lt;/th&gt;
             &lt;/tr&gt;
         &lt;/thead&gt;
         &lt;tbody&gt;
-            @forelse ($penerbit as $index =&gt; $row)
+            @forelse ($prodi as $index =&gt; $row)
                 &lt;tr&gt;
                     &lt;td&gt;{{ $loop->iteration }}&lt;/td&gt;
-                    &lt;td&gt;{{ $row->nama_penerbit }}&lt;/td&gt;
+                    &lt;td&gt;{{ $row->prodi_nama }}&lt;/td&gt;
                     &lt;td&gt;
-                        &lt;a href="/bukuPenerbit/{{ $row->id_penerbit }}" class="btn btn-sm btn-secondary"&gt;Lihat&lt;/a&gt; | 
-                        &lt;a href="/editPenerbit/{{ $row->id_penerbit }}" class="btn btn-sm btn-warning"&gt;Edit&lt;/a&gt; | 
-                        &lt;a href="/deletePenerbit/{{ $row->id_penerbit }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')"&gt;Hapus&lt;/a&gt;
+                        &lt;a href="/editProdi/{{ $row->prodi_id }}" class="btn btn-sm btn-warning"&gt;Edit&lt;/a&gt; | 
+                        &lt;a href="/deleteProdi/{{ $row->prodi_id }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')"&gt;Hapus&lt;/a&gt;
                     &lt;/td&gt;
                 &lt;/tr&gt;
             @empty
                 &lt;tr&gt;
-                    &lt;td colspan="7" class="text-center"&gt;Tidak ada data penerbit.&lt;/td&gt;
+                    &lt;td colspan="7" class="text-center"&gt;Tidak ada data prodi.&lt;/td&gt;
                 &lt;/tr&gt;
             @endforelse
         &lt;/tbody&gt;
@@ -595,7 +572,7 @@ class BukuController extends Controller
     </div>
 
     <div class="step">
-        <h5>Buat view untuk Tambah Penerbit: </h5>
+        <h5>Buat view untuk Tambah Prodi (tambahProdi.blade.php): </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
         <pre>
 @extends('main')
@@ -614,9 +591,9 @@ class BukuController extends Controller
         @endif
 
         &lt;h1&gt;POST&lt;/h1&gt;
-        &lt;form action="/kirimPenerbit" method="post" enctype="multipart/form-data"&gt;
+        &lt;form action="/kirimProdi" method="post" enctype="multipart/form-data"&gt;
             @csrf
-            &lt;input type="text" class="form-control mb-4" name="nama_penerbit" placeholder="Nama Penerbit"&gt;
+            &lt;input type="text" class="form-control mb-4" name="prodi_nama" placeholder="Nama Prodi"&gt;
             &lt;button type="submit"&gt;Tambah&lt;/button&gt;
         &lt;/form&gt;
     &lt;/div&gt;
@@ -625,7 +602,7 @@ class BukuController extends Controller
     </div>
 
     <div class="step">
-        <h5>Buat view untuk Edit Penerbit: </h5>
+        <h5>Buat view untuk Edit Prodi (editProdi.blade.php): </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
         <pre>
 @extends('main')
@@ -643,10 +620,10 @@ class BukuController extends Controller
             &lt;/div&gt;
         @endif
 
-        &lt;form action="/updatePenerbit" method="post"&gt;
+        &lt;form action="/updateProdi" method="post"&gt;
             @csrf
-            &lt;input type="hidden" name="id_penerbit" value="{{ $penerbit->id_penerbit }}"&gt;
-            &lt;input type="text" class="form-control mb-4" name="nama_penerbit" value="{{ $penerbit->nama_penerbit }}"&gt;
+            &lt;input type="hidden" name="prodi_id" value="{{ $prodi->prodi_id }}"&gt;
+            &lt;input type="text" class="form-control mb-4" name="prodi_nama" value="{{ old('prodi_nama', $prodi-&gt;prodi_nama) }}"&gt;
 
             &lt;button type="submit" class="btn btn-primary"&gt;Edit&lt;/button&gt;
         &lt;/form&gt;
@@ -656,40 +633,37 @@ class BukuController extends Controller
     </div>
 
     <div class="step">
-        <h5>Buat view untuk Buku: </h5>
+        <h5>Buat view untuk Mahasiswa (mahasiswa.blade.php): </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
         <pre>
 @extends('main')
 @section('content')
     &lt;h1&gt;{{ $content }}&lt;/h1&gt;
-    &lt;h2&gt;Daftar Buku&lt;/h2&gt;
-    &lt;a href="/tambahBuku" class="btn btn-sm btn-success m-2"&gt;Tambah Buku&lt;/a&gt;
+    &lt;h2&gt;Daftar Mahasiswa&lt;/h2&gt;
+    &lt;a href="/tambahMahasiswa" class="btn btn-sm btn-success m-2"&gt;Tambah Mahasiswa&lt;/a&gt;
     &lt;table class="table table-bordered"&gt;
         &lt;thead class="thead-dark"&gt;
             &lt;tr&gt;
                 &lt;th&gt;No&lt;/th&gt;
-                &lt;th&gt;Judul&lt;/th&gt;
-                &lt;th&gt;Penerbit&lt;/th&gt;
-                &lt;th&gt;Tahun&lt;/th&gt;
-                &lt;th&gt;Deskripsi&lt;/th&gt;
-                &lt;th&gt;Cover&lt;/th&gt;
-                &lt;th&gt;Aksi&lt;/th&gt;
+                &lt;th&gt;NIM&lt;/th&gt;
+                &lt;th&gt;Nama&lt;/th&gt;
+                &lt;th&gt;Nama Prodi&lt;/th&gt;
+                &lt;th&gt;Nomor Telepon&lt;/th&gt;
+                &lt;th&gt;Action&lt;/th&gt;
             &lt;/tr&gt;
         &lt;/thead&gt;
         &lt;tbody&gt;
-            @forelse ($buku as $index =&gt; $row)
+            @forelse ($mahasiswa as $index =&gt; $row)
                 &lt;tr&gt;
                     &lt;td&gt;{{ $loop-&gt;iteration }}&lt;/td&gt;
-                    &lt;td&gt;{{ $row-&gt;judul }}&lt;/td&gt;
-                    &lt;td&gt;{{ $row-&gt;penerbit-&gt;nama_penerbit ?? '-' }}&lt;/td&gt;
-                    &lt;td&gt;{{ $row-&gt;tahun }}&lt;/td&gt;
-                    &lt;td&gt;{{ $row-&gt;deskripsi }}&lt;/td&gt;
+                    &lt;td&gt;{{ $row-&gt;NIM }}&lt;/td&gt;
+                    &lt;td&gt;{{ $row-&gt;nama }}&lt;/td&gt;
+                    &lt;td&gt;{{ $row-&gt;jeniskelamin }}&lt;/td&gt;
+                    &lt;td&gt;{{ $row-&gt;prodi-&gt;prodi_nama ?? '-' }}&lt;/td&gt;
+                    &lt;td&gt;{{ $row-&gt;notelp }}&lt;/td&gt;
                     &lt;td&gt;
-                        &lt;img class="img-thumbnail" width="50" src="{{ asset('storage/'.$row-&gt;cover) }}" alt="coverBuku"&gt;
-                    &lt;/td&gt;
-                    &lt;td&gt;
-                        &lt;a href="/editBuku/{{ $row-&gt;id_buku }}" class="btn btn-sm btn-warning"&gt;Edit&lt;/a&gt; | 
-                        &lt;a href="/deleteBuku/{{ $row-&gt;id_buku }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')"&gt;Hapus&lt;/a&gt;
+                        &lt;a href="/editMahasiswa/{{ $row-&gt;NIM }}" class="btn btn-sm btn-warning"&gt;Edit&lt;/a&gt; | 
+                        &lt;a href="/deleteMahasiswa/{{ $row-&gt;NIM }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')"&gt;Hapus&lt;/a&gt;
                     &lt;/td&gt;
                 &lt;/tr&gt;
             @empty
@@ -704,7 +678,7 @@ class BukuController extends Controller
     </div>
 
     <div class="step">
-        <h5>Buat view untuk Tambah Buku: </h5>
+        <h5>Buat view untuk Tambah Mahasiswa (tambahMahasiswa.blade.php): </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
         <pre>
 @extends('main')
@@ -723,18 +697,22 @@ class BukuController extends Controller
         @endif
 
         &lt;h1&gt;POST&lt;/h1&gt;
-        &lt;form action="/kirimBuku" method="post" enctype="multipart/form-data"&gt;
+        &lt;form action="/kirimMahasiswa" method="post"&gt;
             @csrf
-            &lt;input type="text" class="form-control mb-4" name="judul" placeholder="Judul"&gt;
-            &lt;select class="form-control mb-4" name="id_penerbit"&gt;
-                &lt;option value=""&gt;-- Pilih Penerbit --&lt;/option&gt;
-                @foreach ($penerbitlist as $penerbit)
-                    &lt;option value="{{ $penerbit-&gt;id_penerbit }}"&gt;{{ $penerbit-&gt;nama_penerbit }}&lt;/option&gt;
+            &lt;input type="text" class="form-control mb-4" name="NIM" placeholder="NIM"&gt;
+            &lt;input type="text" class="form-control mb-4" name="nama" placeholder="Nama"&gt;
+            &lt;select class="form-control mb-4" name="jeniskelamin"&gt;
+                &lt;option value=""&gt;-- Jenis Kelamin --&lt;/option&gt;
+                &lt;option value="L"&gt;Laki-laki&lt;/option&gt;
+                &lt;option value="P"&gt;Perempuan&lt;/option&gt;
+            &lt;/select&gt;
+            &lt;select class="form-control mb-4" name="id_prodi"&gt;
+                &lt;option value=""&gt;-- Pilih Prodi --&lt;/option&gt;
+                @foreach ($prodilist as $prodi)
+                    &lt;option value="{{ $prodi-&gt;prodi_id }}"&gt;{{ $prodi-&gt;prodi_nama }}&lt;/option&gt;
                 @endforeach
             &lt;/select&gt;
-            &lt;input type="text" class="form-control mb-4" name="tahun" placeholder="Tahun Terbit"&gt;
-            &lt;textarea class="form-control mb-4" name="deskripsi" rows="5" cols="100" placeholder="Deskripsi"&gt;&lt;/textarea&gt;
-            &lt;input type="file" class="form-control mb-4" name="cover" placeholder="Cover"&gt;
+            &lt;input type="text" class="form-control mb-4" name="notelp" placeholder="Nomor Telepon"&gt;
 
             &lt;button type="submit"&gt;Tambah&lt;/button&gt;
         &lt;/form&gt;
@@ -744,7 +722,7 @@ class BukuController extends Controller
     </div>
 
     <div class="step">
-        <h5>Buat view untuk Edit Buku: </h5>
+        <h5>Buat view untuk Edit Mahasiswa (editMahasiswa.blade.php): </h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
         <pre>
 @extends('main')
@@ -762,196 +740,43 @@ class BukuController extends Controller
             &lt;/div&gt;
         @endif
 
-        &lt;form action="/updateBuku" method="post"&gt;
+        &lt;h1&gt;POST&lt;/h1&gt;
+        &lt;form action="/updateMahasiswa" method="post" enctype="multipart/form-data"&gt;
             @csrf
-            &lt;input type="hidden" name="id_buku" value="{{ $buku-&gt;id_buku }}"&gt;
 
-            &lt;input type="text" class="form-control mb-4" name="judul" placeholder="Judul"
-                value="{{ old('judul', $buku-&gt;judul) }}"&gt;
+            &lt;input type="hidden" name="NIM" value="{{ $mahasiswa-&gt;NIM }}"&gt;
 
-            &lt;select class="form-control mb-4" name="id_penerbit"&gt;
-                &lt;option value=""&gt;-- Pilih Penerbit --&lt;/option&gt;
-                @foreach ($penerbitlist as $penerbit)
-                    &lt;option value="{{ $penerbit-&gt;id_penerbit }}" @selected($penerbit-&gt;id_penerbit == $buku-&gt;id_penerbit)&gt;
-                        {{ $penerbit-&gt;nama_penerbit }}
+            &lt;input type="text" class="form-control mb-4" name="NIM" placeholder="NIM"
+                value="{{ old('NIM', $mahasiswa-&gt;NIM) }}" readonly&gt;
+
+            &lt;input type="text" class="form-control mb-4" name="nama" placeholder="Nama"
+                value="{{ old('nama', $mahasiswa-&gt;nama) }}"&gt;
+
+            &lt;select class="form-control mb-4" name="jeniskelamin"&gt;
+                &lt;option value=""&gt;-- Pilih Jenis Kelamin --&lt;/option&gt;
+                &lt;option value="L" {{ old('jeniskelamin', $mahasiswa-&gt;jeniskelamin) == 'L' ? 'selected' : '' }}&gt;
+                    Laki-laki&lt;/option&gt;
+                &lt;option value="P" {{ old('jeniskelamin', $mahasiswa-&gt;jeniskelamin) == 'P' ? 'selected' : '' }}&gt;
+                    Perempuan&lt;/option&gt;
+            &lt;/select&gt;
+
+            &lt;select class="form-control mb-4" name="prodi_id"&gt;
+                &lt;option value=""&gt;-- Pilih Prodi --&lt;/option&gt;
+                @foreach ($prodilist as $prodi)
+                    &lt;option value="{{ $prodi-&gt;prodi_id }}"
+                        {{ old('prodi_id', $mahasiswa-&gt;prodi_id) == $prodi-&gt;prodi_id ? 'selected' : '' }}&gt;
+                        {{ $prodi-&gt;prodi_nama }}
                     &lt;/option&gt;
                 @endforeach
             &lt;/select&gt;
 
-            &lt;input type="text" class="form-control mb-4" name="tahun" placeholder="Tahun Terbit"
-                value="{{ old('tahun', $buku-&gt;tahun) }}"&gt;
-
-            &lt;textarea class="form-control mb-4" name="deskripsi" rows="5" placeholder="Deskripsi"&gt;{{ old('deskripsi', $buku-&gt;deskripsi) }}&lt;/textarea&gt;
+            &lt;input type="text" class="form-control mb-4" name="notelp" placeholder="Nomor Telepon"
+                value="{{ old('notelp', $mahasiswa-&gt;notelp) }}"&gt;
 
             &lt;button type="submit" class="btn btn-primary"&gt;Edit&lt;/button&gt;
         &lt;/form&gt;
     &lt;/div&gt;
 @endsection
-    </pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat view untuk Buku by Penerbit: </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>
-@extends('main')
-@section('content')
-    &lt;h1&gt;{{ $content }}&lt;/h1&gt;
-    &lt;h2&gt;Oleh Penerbit: {{ $penerbit-&gt;nama_penerbit }}&lt;/h2&gt;
-    &lt;div class="m-2"&gt;
-        &lt;form action="/cetak-bukupenerbit" method="post"&gt;
-            @csrf
-            &lt;input type="hidden" name="id_penerbit" value="{{ $penerbit-&gt;id_penerbit }}"&gt;
-            &lt;button type="submit" class="btn btn-warning"&gt;Cetak PDF&lt;/button&gt;
-        &lt;/form&gt;
-    &lt;/div&gt;
-    &lt;table class="table table-bordered"&gt;
-        &lt;thead class="thead-dark"&gt;
-            &lt;tr&gt;
-                &lt;th&gt;No&lt;/th&gt;
-                &lt;th&gt;Judul&lt;/th&gt;
-                &lt;th&gt;Tahun&lt;/th&gt;
-                &lt;th&gt;Deskripsi&lt;/th&gt;
-                &lt;th&gt;Cover&lt;/th&gt;
-            &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-            @forelse ($penerbit-&gt;buku as $index =&gt; $row)
-                &lt;tr&gt;
-                    &lt;td&gt;{{ $loop-&gt;iteration }}&lt;/td&gt;
-                    &lt;td&gt;{{ $row-&gt;judul }}&lt;/td&gt;
-                    &lt;td&gt;{{ $row-&gt;tahun }}&lt;/td&gt;
-                    &lt;td&gt;{{ $row-&gt;deskripsi }}&lt;/td&gt;
-                    &lt;td&gt;
-                        &lt;img class="img-thumbnail" width="50" src="{{ asset('storage/'.$row-&gt;cover) }}" alt="coverBuku"&gt;
-                    &lt;/td&gt;
-                &lt;/tr&gt;
-            @empty
-                &lt;tr&gt;
-                    &lt;td colspan="5" class="text-center"&gt;Tidak ada data buku.&lt;/td&gt;
-                &lt;/tr&gt;
-            @endforelse
-        &lt;/tbody&gt;
-    &lt;/table&gt;
-@endsection
-    </pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat view untuk Cetak Buku: </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Data Buku&lt;/title&gt;
-    &lt;style&gt;
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f1f1f1;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        p {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        th {
-            background-color: #000;
-            color: #fff;
-            padding: 12px;
-            text-align: center;
-        }
-
-        td {
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        img.img-thumbnail {
-            width: 60px;
-            height: auto;
-            border-radius: 5px;
-            box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-        }
-
-        .no-data {
-            color: #888;
-            font-style: italic;
-        }
-    &lt;/style&gt;
-&lt;/head&gt;
-
-&lt;body&gt;
-    &lt;div class="container"&gt;
-        &lt;h2&gt;Daftar Buku&lt;/h2&gt;
-        &lt;p&gt;Berikut adalah koleksi buku yang tersedia di perpustakaan.&lt;/p&gt;
-
-        &lt;table&gt;
-            &lt;thead&gt;
-                &lt;tr&gt;
-                    &lt;th&gt;No&lt;/th&gt;
-                    &lt;th&gt;Judul&lt;/th&gt;
-                    &lt;th&gt;Tahun&lt;/th&gt;
-                    &lt;th&gt;Deskripsi&lt;/th&gt;
-                    &lt;th&gt;Cover&lt;/th&gt;
-                &lt;/tr&gt;
-            &lt;/thead&gt;
-            &lt;tbody&gt;
-                @forelse ($buku as $index =&gt; $row)
-                    &lt;tr&gt;
-                        &lt;td&gt;{{ $loop-&gt;iteration }}&lt;/td&gt;
-                        &lt;td&gt;{{ $row-&gt;judul }}&lt;/td&gt;
-                        &lt;td&gt;{{ $row-&gt;tahun }}&lt;/td&gt;
-                        &lt;td&gt;{{ Str::limit($row-&gt;deskripsi, 100, '...') }}&lt;/td&gt;
-                        &lt;td&gt;
-                            &lt;img class="img-thumbnail" src="{{ asset('storage/' . $row-&gt;cover) }}" alt="coverBuku"&gt;
-                        &lt;/td&gt;
-                    &lt;/tr&gt;
-                @empty
-                    &lt;tr&gt;
-                        &lt;td colspan="6" class="no-data"&gt;Tidak ada data buku.&lt;/td&gt;
-                    &lt;/tr&gt;
-                @endforelse
-            &lt;/tbody&gt;
-        &lt;/table&gt;
-    &lt;/div&gt;
-&lt;/body&gt;
-
-&lt;/html&gt;
     </pre>
     </div>
 
