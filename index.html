@@ -3,192 +3,159 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Ujian Pemrograman Web II</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujian Pemrograman Web II - Tutorial Laravel</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+            background: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
         }
 
         .step {
-            background: lightgray;
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 10px;
+            background: #ffffff;
+            border-left: 5px solid #007BFF;
+            padding: 20px;
+            margin-bottom: 20px;
             position: relative;
-            border-radius: 5px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h5 {
+            margin-top: 0;
+            color: #444;
+            font-size: 1.1rem;
         }
 
         .copy-button {
             position: absolute;
             top: 15px;
             right: 15px;
-            padding: 5px 10px;
+            padding: 6px 12px;
             font-size: 12px;
             cursor: pointer;
             border: none;
-            border-radius: 3px;
+            border-radius: 4px;
             background-color: #007BFF;
             color: #fff;
+            transition: background 0.3s;
+        }
+
+        .copy-button:hover {
+            background-color: #0056b3;
         }
 
         pre {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            margin-top: 10px;
             white-space: pre-wrap;
-            word-break: break-word;
+            word-break: break-all;
+        }
+
+        code {
+            font-family: 'Consolas', monospace;
         }
     </style>
 </head>
 
 <body>
 
-    <h1>Ujian Pemrograman Web II</h1>
+    <h1>Panduan Ujian Pemrograman Web II (Laravel)</h1>
 
     <div class="step">
-        <h5>Buka folder "htdocs" atau folder pilihan lain</h5>
-        <h5>Jalankan XAMPP</h5>
+        <h5>1. Persiapan Lingkungan:</h5>
+        <ul>
+            <li>Buka folder <strong>htdocs</strong> (XAMPP) atau folder kerja Anda.</li>
+            <li>Pastikan Apache dan MySQL di XAMPP sudah <strong>Running</strong>.</li>
+        </ul>
     </div>
 
     <div class="step">
-        <h5>Klik kanan pada mouse, lalu pilih "Open in Terminal" untuk membuat project baru: </h5>
+        <h5>2. Inisialisasi Project Baru:</h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>laravel new nama_project</pre>
+        <pre><code>laravel new nama_project</code></pre>
+        <p><small>Opsi Instalasi:</small></p>
+        <ul>
+            <li>Starter Kit: <strong>None</strong> (Langsung Enter)</li>
+            <li>Database: Ketik <strong>mysql</strong> lalu Enter</li>
+            <li>Run Migrations: <strong>Yes</strong></li>
+            <li>Run NPM Install/Build: <strong>Yes</strong></li>
+        </ul>
     </div>
 
     <div class="step">
-        <h5>Buat project baru secara detail (pastikan XAMPP sudah berjalan dan diaktifkan): </h5>
-        <h5>1. Setelah "laravel new nama_project" lalu tekan ENTER, akan muncul pertanyaan berikut:</h5>
-        <h5>"Which starter kit would you like to install? [None]" => Tekan ENTER</h5>
-        <h5>2. Setelah itu akan muncul pertanyaan berikut:</h5>
-        <h5>"Which database will your application use? [SQLite]" => Ketik "mysql" lalu tekan ENTER</h5>
-        <h5>3. Setelah itu akan muncul pertanyaan berikut:</h5>
-        <h5>"Default database updated. Would you like to run the default database migrations? (yes/no) [yes]" => Tekan ENTER</h5>
-        <h5>4. Setelah itu akan muncul pertanyaan berikut:</h5>
-        <h5>"Would you like to run npm install and npm run build? (yes/no) [yes]" => Tekan ENTER</h5>
-        <h5>5. Seharusnya project Laravel sudah berhasil dibuat. Buka project dengan:</h5>
-        <h5>"code nama_project" atau "Open Folder" di Visual Studio Code</h5>
-    </div>
-
-    <div class="step">
-        <h5>Buat migrasi umum: </h5>
+        <h5>3. Setup Database (Jika diperlukan manual):</h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan migrate</pre>
+        <pre><code>php artisan migrate</code></pre>
     </div>
 
     <div class="step">
-        <h5>Buat controller untuk Main: </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:controller MainController</pre>
-    </div>
-
-    <div class="step">
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>&lt;?php
-
+        <h5>4. Main Controller & View (Layout Utama):</h5>
+        <button class="copy-button" onclick="copyToClipboard(this)">Salin CMD</button>
+        <pre><code>php artisan make:controller MainController</code></pre>
+        <button class="copy-button" style="top: 80px;" onclick="copyToClipboard(this)">Salin Code</button>
+        <pre><code>&lt;?php
 namespace App\Http\Controllers;
 
-class MainController extends Controller
-{
-    public function main()
-    {
-        $title = "Main";
+class MainController extends Controller {
+    public function main() {
+        $title = "Main Layout";
         $content = "";
         return view('main', compact('title', 'content'));
     }
-}
-    </pre>
+}</code></pre>
     </div>
 
     <div class="step">
-        <h5>Buat view untuk main (main.blade.php): </h5>
+        <h5>5. File View: resources/views/main.blade.php</h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>&lt;!doctype html&gt;
+        <pre><code>&lt;!doctype html&gt;
 &lt;html lang="en"&gt;
-
 &lt;head&gt;
     &lt;meta charset="utf-8"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
     &lt;title&gt;{{ $title }}&lt;/title&gt;
-    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
 &lt;/head&gt;
-
 &lt;body&gt;
-    &lt;nav class="navbar navbar-expand-lg bg-primary"&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4"&gt;
         &lt;div class="container-fluid"&gt;
-            &lt;a class="navbar-brand text-white" href="/"&gt;Navbar&lt;/a&gt;
-            &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation"&gt;
-                &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
-            &lt;/button&gt;
-            &lt;div class="collapse navbar-collapse" id="navbarSupportedContent"&gt;
-                &lt;ul class="navbar-nav me-auto mb-2 mb-lg-0"&gt;
-                    &lt;li class="nav-item"&gt;
-                        &lt;a class="nav-link active text-white" aria-current="page" href="/"&gt;Home&lt;/a&gt;
-                    &lt;/li&gt;
-                    &lt;li class="nav-item"&gt;
-                        &lt;a class="nav-link text-white" href="/prodi"&gt;Prodi&lt;/a&gt;
-                    &lt;/li&gt;
-                    &lt;li class="nav-item"&gt;
-                        &lt;a class="nav-link text-white" href="/mahasiswa"&gt;Mahasiswa&lt;/a&gt;
-                    &lt;/li&gt;
+            &lt;a class="navbar-brand" href="/"&gt;SIAKAD&lt;/a&gt;
+            &lt;div class="collapse navbar-collapse"&gt;
+                &lt;ul class="navbar-nav me-auto"&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="/prodi"&gt;Prodi&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="/mahasiswa"&gt;Mahasiswa&lt;/a&gt;&lt;/li&gt;
                 &lt;/ul&gt;
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/nav&gt;
-    @yield('content')
-    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"&gt;
-    &lt;/script&gt;
+    &lt;div class="container"&gt;
+        @yield('content')
+    &lt;/div&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
 &lt;/body&gt;
-
-&lt;/html&gt;
-    </pre>
+&lt;/html&gt;</code></pre>
     </div>
 
     <div class="step">
-        <h5>Buat controller untuk Home: </h5>
+        <h5>6. Route Desktop: routes/web.php</h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:controller HomeController</pre>
-    </div>
-
-    <div class="step">
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>&lt;?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-
-class HomeController extends Controller
-{
-    public function home()
-    {
-        $title = "Home";
-        $content = "Ini halaman Home dari controller";
-        return view('home', compact('title', 'content'));
-    }
-}
-    </pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat view untuk home (home.blade.php): </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>
-@extends('main')
-@section('content')
-&lt;h1&gt;{{ $content }}&lt;/h1&gt;
-@endsection
-    </pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat route untuk all: secara manual di web.php (hapus semua dan isi dengan ini)</h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>&lt;?php
-
+        <pre><code>&lt;?php
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\ProdiController;
@@ -196,604 +163,108 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home']);
 
-Route::get('/prodi', [ProdiController::class, 'index']);
-Route::get('/tambahProdi', [ProdiController::class, 'tambah']);
-Route::post('/kirimProdi', [ProdiController::class, 'kirim']);
-Route::get('/editProdi/{id}', [ProdiController::class, 'edit']);
-Route::post('/updateProdi', [ProdiController::class, 'update']);
-Route::get('/deleteProdi/{id}', [ProdiController::class, 'delete']);
+Route::controller(ProdiController::class)->group(function () {
+    Route::get('/prodi', 'index');
+    Route::get('/tambahProdi', 'tambah');
+    Route::post('/kirimProdi', 'kirim');
+    Route::get('/editProdi/{id}', 'edit');
+    Route::post('/updateProdi', 'update');
+    Route::get('/deleteProdi/{id}', 'delete');
+});
 
-Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
-Route::get('/tambahMahasiswa', [MahasiswaController::class, 'tambah']);
-Route::post('/kirimMahasiswa', [MahasiswaController::class, 'kirim']);
-Route::get('/editMahasiswa/{id}', [MahasiswaController::class, 'edit']);
-Route::post('/updateMahasiswa', [MahasiswaController::class, 'update']);
-Route::get('/deleteMahasiswa/{id}', [MahasiswaController::class, 'delete']);
-
-    </pre>
+Route::controller(MahasiswaController::class)->group(function () {
+    Route::get('/mahasiswa', 'index');
+    Route::get('/tambahMahasiswa', 'tambah');
+    Route::post('/kirimMahasiswa', 'kirim');
+    Route::get('/editMahasiswa/{id}', 'edit');
+    Route::post('/updateMahasiswa', 'update');
+    Route::get('/deleteMahasiswa/{id}', 'delete');
+});</code></pre>
     </div>
 
     <div class="step">
-        <h5>Buat migration untuk table Prodi: </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:migration CreateTableProdi</pre>
+        <h5>7. Migration Table Prodi:</h5>
+        <pre><code>php artisan make:migration CreateTableProdi</code></pre>
+        <button class="copy-button" onclick="copyToClipboard(this)">Salin Schema</button>
+        <pre><code>Schema::create('Prodi', function (Blueprint $table) {
+    $table->id('prodi_id');
+    $table->string('prodi_nama');
+});</code></pre>
     </div>
 
     <div class="step">
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>&lt;?php
-
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
-
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('Prodi', function (Blueprint $table) {
-            $table->id('prodi_id');
-            $table->string('prodi_nama');
-        });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('Prodi');
-    }
-};
-    </pre>
+        <h5>8. Migration Table Mahasiswa:</h5>
+        <pre><code>php artisan make:migration CreateTableMahasiswa</code></pre>
+        <button class="copy-button" onclick="copyToClipboard(this)">Salin Schema</button>
+        <pre><code>Schema::create('Mahasiswa', function (Blueprint $table) {
+    $table->id('NIM');
+    $table->string('nama');
+    $table->string('jeniskelamin');
+    $table->unsignedBigInteger('prodi_id');
+    $table->foreign('prodi_id')->references('prodi_id')->on('Prodi')->onDelete('cascade');
+    $table->string('notelp');
+});</code></pre>
     </div>
 
     <div class="step">
-        <h5>Lakukan migrasi Prodi (WAJIB): </h5>
+        <h5>9. Model Prodi: app/Models/Prodi.php</h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan migrate</pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat migration untuk table Mahasiswa: </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:migration CreateTableMahasiswa</pre>
-    </div>
-
-    <div class="step">
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>&lt;?php
-
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
-
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('Mahasiswa', function (Blueprint $table) {
-            $table-&gt;id('NIM');
-            $table-&gt;string('nama');
-            $table-&gt;string('jeniskelamin');
-            $table-&gt;unsignedBigInteger('prodi_id');
-            $table-&gt;foreign('prodi_id')-&gt;references('prodi_id')-&gt;on('Prodi');
-            $table-&gt;string('notelp');
-        });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('Mahasiswa');
-    }
-};
-    </pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat migrasi Mahasiswa (WAJIB): </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan migrate</pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat model untuk Prodi: </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:model Prodi</pre>
-    </div>
-
-    <div class="step">
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>&lt;?php
-
+        <pre><code>&lt;?php
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Prodi extends Model
-{
+class Prodi extends Model {
     protected $table = 'Prodi';
     protected $primaryKey = 'prodi_id';
-    protected $fillable = [
-        'prodi_nama',
-    ];
+    protected $fillable = ['prodi_nama'];
     public $timestamps = false;
-    
-    function mahasiswa() : HasMany {
+
+    public function mahasiswa() {
         return $this->hasMany(Mahasiswa::class, 'prodi_id', 'prodi_id');
     }
-}
-    </pre>
+}</code></pre>
     </div>
 
     <div class="step">
-        <h5>Buat model untuk Mahasiswa: </h5>
+        <h5>10. Model Mahasiswa: app/Models/Mahasiswa.php</h5>
         <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:model Mahasiswa</pre>
-    </div>
-
-    <div class="step">
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>&lt;?php
-
+        <pre><code>&lt;?php
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
 
-class Mahasiswa extends Model
-{
+class Mahasiswa extends Model {
     protected $table = 'Mahasiswa';
     protected $primaryKey = 'NIM';
-    protected $fillable = [
-        'NIM',
-        'nama',
-        'jeniskelamin',
-        'prodi_id',
-        'notelp'
-    ];
+    protected $fillable = ['NIM', 'nama', 'jeniskelamin', 'prodi_id', 'notelp'];
     public $timestamps = false;
 
-    public function prodi()
-    {
+    public function prodi() {
         return $this->belongsTo(Prodi::class, 'prodi_id', 'prodi_id');
     }
-}
-    </pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat controller untuk Prodi: </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:controller ProdiController</pre>
-    </div>
-
-    <div class="step">
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>&lt;?php
-
-namespace App\Http\Controllers;
-
-use App\Models\Prodi;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-
-class ProdiController extends Controller
-{
-    public function index()
-    {
-        $title = "Prodi";
-        $content = "Ini halaman Prodi dari controller";
-        $prodi = Prodi::all();
-        return view('prodi', compact('title', 'content', 'prodi'));
-    }
-
-    public function tambah()
-    {
-        $title = "Tambah Prodi";
-        $content = "Ini halaman Tambah Prodi dari controller";
-        return view('tambahProdi', compact('title', 'content'));
-    }
-
-    public function kirim(Request $request): RedirectResponse
-    {
-        $validasi = $request->validate([
-            'prodi_nama' => 'required'
-        ]);
-
-        Prodi::insert($validasi);
-
-        return redirect('/prodi');
-    }
-
-    public function update(Request $request): RedirectResponse
-    {
-        $prodi_id = $request->prodi_id;
-
-        $validasi = $request->validate([
-            'prodi_nama' => 'required'
-        ]);
-
-        Prodi::where('prodi_id', $prodi_id)->update($validasi);
-
-        return redirect('/prodi');
-    }
-
-    public function edit($id)
-    {
-        $title = "Edit Prodi";
-        $content = "Ini halaman Edit Prodi dari controller";
-        $prodi = Prodi::find($id);
-
-        return view('editProdi', compact('title', 'content', 'prodi'));
-    }
-
-    public function delete($id): RedirectResponse
-    {
-        Prodi::where('prodi_id', $id)->delete();
-        return redirect('/prodi');
-    }
-}
-    </pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat controller untuk Mahasiswa: </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>php artisan make:controller MahasiswaController</pre>
-    </div>
-
-    <div class="step">
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>&lt;?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Models\Mahasiswa;
-use App\Models\Prodi;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\RedirectResponse;
-
-class MahasiswaController extends Controller
-{
-    public function index()
-    {
-        $title = "Mahasiswa";
-        $content = "Ini halaman Mahasiswa dari controller";
-        $mahasiswa = Mahasiswa::all();
-        return view('mahasiswa', compact('title', 'content', 'mahasiswa'));
-    }
-
-    public function tambah()
-    {
-        $title = "Tambah Mahasiswa";
-        $content = "Ini halaman Tambah Mahasiswa dari controller";
-        $prodilist = Prodi::all();
-        return view('tambahMahasiswa', compact('title', 'content', 'prodilist'));
-    }
-
-    public function kirim(Request $request): RedirectResponse
-    {
-        $validasi = $request->validate([
-            'NIM' => 'required|unique:mahasiswa,NIM',
-            'nama' => 'required',
-            'jeniskelamin' => 'required',
-            'prodi_id' => 'required',
-            'notelp' => 'required'
-        ]);
-
-        Mahasiswa::insert($validasi);
-
-        return redirect('/mahasiswa');
-    }
-
-    public function update(Request $request): RedirectResponse
-    {
-        $NIM = $request->NIM;
-
-        $validasi = $request->validate([
-            'nama' => 'required',
-            'jeniskelamin' => 'required',
-            'prodi_id' => 'required',
-            'notelp' => 'required'
-        ]);
-
-        Mahasiswa::where('NIM', $NIM)->update($validasi);
-
-        return redirect('/mahasiswa');
-    }
-
-    public function edit($id)
-    {
-        $title = "Edit Mahasiswa";
-        $content = "Ini halaman Edit Mahasiswa dari controller";
-        $mahasiswa = Mahasiswa::find($id);
-
-        $prodilist = Prodi::all();
-
-        return view('editMahasiswa', compact('title', 'content', 'mahasiswa', 'prodilist'));
-    }
-
-    public function delete($id): RedirectResponse
-    {
-        Mahasiswa::where('NIM', $id)->delete();
-        return redirect('/mahasiswa');
-    }
-}
-    </pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat view untuk Prodi (prodi.blade.php): </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>
-@extends('main')
-@section('content')
-    &lt;h1&gt;{{ $content }}&lt;/h1&gt;
-    &lt;h2&gt;Daftar Prodi&lt;/h2&gt;
-    &lt;a href="/tambahProdi" class="btn btn-sm btn-success m-2"&gt;Tambah Prodi&lt;/a&gt;
-    &lt;table class="table table-bordered"&gt;
-        &lt;thead&gt;
-            &lt;tr&gt;
-                &lt;th&gt;No&lt;/th&gt;
-                &lt;th&gt;Nama Prodi&lt;/th&gt;
-                &lt;th&gt;Action&lt;/th&gt;
-            &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-            @forelse ($prodi as $index =&gt; $row)
-                &lt;tr&gt;
-                    &lt;td&gt;{{ $loop->iteration }}&lt;/td&gt;
-                    &lt;td&gt;{{ $row->prodi_nama }}&lt;/td&gt;
-                    &lt;td&gt;
-                        &lt;a href="/editProdi/{{ $row->prodi_id }}" class="btn btn-sm btn-warning"&gt;Edit&lt;/a&gt; | 
-                        &lt;a href="/deleteProdi/{{ $row->prodi_id }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')"&gt;Hapus&lt;/a&gt;
-                    &lt;/td&gt;
-                &lt;/tr&gt;
-            @empty
-                &lt;tr&gt;
-                    &lt;td colspan="7" class="text-center"&gt;Tidak ada data prodi.&lt;/td&gt;
-                &lt;/tr&gt;
-            @endforelse
-        &lt;/tbody&gt;
-    &lt;/table&gt;
-@endsection
-    </pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat view untuk Tambah Prodi (tambahProdi.blade.php): </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>
-@extends('main')
-@section('content')
-    &lt;h1&gt;{{ $content }}&lt;/h1&gt;
-    &lt;div class="container"&gt;
-
-        @if ($errors-&gt;any())
-            &lt;div class="alert alert-danger"&gt;
-                &lt;ul&gt;
-                    @foreach ($errors->all() as $error)
-                        &lt;li&gt;{{ $error }}&lt;/li&gt;
-                    @endforeach
-                &lt;/ul&gt;
-            &lt;/div&gt;
-        @endif
-
-        &lt;h1&gt;POST&lt;/h1&gt;
-        &lt;form action="/kirimProdi" method="post" enctype="multipart/form-data"&gt;
-            @csrf
-            &lt;input type="text" class="form-control mb-4" name="prodi_nama" placeholder="Nama Prodi"&gt;
-            &lt;button type="submit"&gt;Tambah&lt;/button&gt;
-        &lt;/form&gt;
-    &lt;/div&gt;
-@endsection
-    </pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat view untuk Edit Prodi (editProdi.blade.php): </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>
-@extends('main')
-@section('content')
-    &lt;h1&gt;{{ $content }}&lt;/h1&gt;
-    &lt;div class="container"&gt;
-
-        @if ($errors-&gt;any())
-            &lt;div class="alert alert-danger"&gt;
-                &lt;ul&gt;
-                    @foreach ($errors->all() as $error)
-                        &lt;li&gt;{{ $error }}&lt;/li&gt;
-                    @endforeach
-                &lt;/ul&gt;
-            &lt;/div&gt;
-        @endif
-
-        &lt;form action="/updateProdi" method="post"&gt;
-            @csrf
-            &lt;input type="hidden" name="prodi_id" value="{{ $prodi->prodi_id }}"&gt;
-            &lt;input type="text" class="form-control mb-4" name="prodi_nama" value="{{ old('prodi_nama', $prodi-&gt;prodi_nama) }}"&gt;
-
-            &lt;button type="submit" class="btn btn-primary"&gt;Edit&lt;/button&gt;
-        &lt;/form&gt;
-    &lt;/div&gt;
-@endsection
-    </pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat view untuk Mahasiswa (mahasiswa.blade.php): </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>
-@extends('main')
-@section('content')
-    &lt;h1&gt;{{ $content }}&lt;/h1&gt;
-    &lt;h2&gt;Daftar Mahasiswa&lt;/h2&gt;
-    &lt;a href="/tambahMahasiswa" class="btn btn-sm btn-success m-2"&gt;Tambah Mahasiswa&lt;/a&gt;
-    &lt;table class="table table-bordered"&gt;
-        &lt;thead class="thead-dark"&gt;
-            &lt;tr&gt;
-                &lt;th&gt;No&lt;/th&gt;
-                &lt;th&gt;NIM&lt;/th&gt;
-                &lt;th&gt;Nama&lt;/th&gt;
-                &lt;th&gt;Nama Prodi&lt;/th&gt;
-                &lt;th&gt;Nomor Telepon&lt;/th&gt;
-                &lt;th&gt;Action&lt;/th&gt;
-            &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-            @forelse ($mahasiswa as $index =&gt; $row)
-                &lt;tr&gt;
-                    &lt;td&gt;{{ $loop-&gt;iteration }}&lt;/td&gt;
-                    &lt;td&gt;{{ $row-&gt;NIM }}&lt;/td&gt;
-                    &lt;td&gt;{{ $row-&gt;nama }}&lt;/td&gt;
-                    &lt;td&gt;{{ $row-&gt;jeniskelamin }}&lt;/td&gt;
-                    &lt;td&gt;{{ $row-&gt;prodi-&gt;prodi_nama ?? '-' }}&lt;/td&gt;
-                    &lt;td&gt;{{ $row-&gt;notelp }}&lt;/td&gt;
-                    &lt;td&gt;
-                        &lt;a href="/editMahasiswa/{{ $row-&gt;NIM }}" class="btn btn-sm btn-warning"&gt;Edit&lt;/a&gt; | 
-                        &lt;a href="/deleteMahasiswa/{{ $row-&gt;NIM }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')"&gt;Hapus&lt;/a&gt;
-                    &lt;/td&gt;
-                &lt;/tr&gt;
-            @empty
-                &lt;tr&gt;
-                    &lt;td colspan="7" class="text-center"&gt;Tidak ada data buku.&lt;/td&gt;
-                &lt;/tr&gt;
-            @endforelse
-        &lt;/tbody&gt;
-    &lt;/table&gt;
-@endsection
-    </pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat view untuk Tambah Mahasiswa (tambahMahasiswa.blade.php): </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>
-@extends('main')
-@section('content')
-    &lt;h1&gt;{{ $content }}&lt;/h1&gt;
-    &lt;div class="container"&gt;
-
-        @if ($errors-&gt;any())
-            &lt;div class="alert alert-danger"&gt;
-                &lt;ul&gt;
-                    @foreach ($errors-&gt;all() as $error)
-                        &lt;li&gt;{{ $error }}&lt;/li&gt;
-                    @endforeach
-                &lt;/ul&gt;
-            &lt;/div&gt;
-        @endif
-
-        &lt;h1&gt;POST&lt;/h1&gt;
-        &lt;form action="/kirimMahasiswa" method="post"&gt;
-            @csrf
-            &lt;input type="text" class="form-control mb-4" name="NIM" placeholder="NIM"&gt;
-            &lt;input type="text" class="form-control mb-4" name="nama" placeholder="Nama"&gt;
-            &lt;select class="form-control mb-4" name="jeniskelamin"&gt;
-                &lt;option value=""&gt;-- Jenis Kelamin --&lt;/option&gt;
-                &lt;option value="L"&gt;Laki-laki&lt;/option&gt;
-                &lt;option value="P"&gt;Perempuan&lt;/option&gt;
-            &lt;/select&gt;
-            &lt;select class="form-control mb-4" name="id_prodi"&gt;
-                &lt;option value=""&gt;-- Pilih Prodi --&lt;/option&gt;
-                @foreach ($prodilist as $prodi)
-                    &lt;option value="{{ $prodi-&gt;prodi_id }}"&gt;{{ $prodi-&gt;prodi_nama }}&lt;/option&gt;
-                @endforeach
-            &lt;/select&gt;
-            &lt;input type="text" class="form-control mb-4" name="notelp" placeholder="Nomor Telepon"&gt;
-
-            &lt;button type="submit"&gt;Tambah&lt;/button&gt;
-        &lt;/form&gt;
-    &lt;/div&gt;
-@endsection
-    </pre>
-    </div>
-
-    <div class="step">
-        <h5>Buat view untuk Edit Mahasiswa (editMahasiswa.blade.php): </h5>
-        <button class="copy-button" onclick="copyToClipboard(this)">Salin</button>
-        <pre>
-@extends('main')
-@section('content')
-    &lt;h1&gt;{{ $content }}&lt;/h1&gt;
-    &lt;div class="container"&gt;
-
-        @if ($errors-&gt;any())
-            &lt;div class="alert alert-danger"&gt;
-                &lt;ul&gt;
-                    @foreach ($errors-&gt;all() as $error)
-                        &lt;li&gt;{{ $error }}&lt;/li&gt;
-                    @endforeach
-                &lt;/ul&gt;
-            &lt;/div&gt;
-        @endif
-
-        &lt;h1&gt;POST&lt;/h1&gt;
-        &lt;form action="/updateMahasiswa" method="post" enctype="multipart/form-data"&gt;
-            @csrf
-
-            &lt;input type="hidden" name="NIM" value="{{ $mahasiswa-&gt;NIM }}"&gt;
-
-            &lt;input type="text" class="form-control mb-4" name="NIM" placeholder="NIM"
-                value="{{ old('NIM', $mahasiswa-&gt;NIM) }}" readonly&gt;
-
-            &lt;input type="text" class="form-control mb-4" name="nama" placeholder="Nama"
-                value="{{ old('nama', $mahasiswa-&gt;nama) }}"&gt;
-
-            &lt;select class="form-control mb-4" name="jeniskelamin"&gt;
-                &lt;option value=""&gt;-- Pilih Jenis Kelamin --&lt;/option&gt;
-                &lt;option value="L" {{ old('jeniskelamin', $mahasiswa-&gt;jeniskelamin) == 'L' ? 'selected' : '' }}&gt;
-                    Laki-laki&lt;/option&gt;
-                &lt;option value="P" {{ old('jeniskelamin', $mahasiswa-&gt;jeniskelamin) == 'P' ? 'selected' : '' }}&gt;
-                    Perempuan&lt;/option&gt;
-            &lt;/select&gt;
-
-            &lt;select class="form-control mb-4" name="prodi_id"&gt;
-                &lt;option value=""&gt;-- Pilih Prodi --&lt;/option&gt;
-                @foreach ($prodilist as $prodi)
-                    &lt;option value="{{ $prodi-&gt;prodi_id }}"
-                        {{ old('prodi_id', $mahasiswa-&gt;prodi_id) == $prodi-&gt;prodi_id ? 'selected' : '' }}&gt;
-                        {{ $prodi-&gt;prodi_nama }}
-                    &lt;/option&gt;
-                @endforeach
-            &lt;/select&gt;
-
-            &lt;input type="text" class="form-control mb-4" name="notelp" placeholder="Nomor Telepon"
-                value="{{ old('notelp', $mahasiswa-&gt;notelp) }}"&gt;
-
-            &lt;button type="submit" class="btn btn-primary"&gt;Edit&lt;/button&gt;
-        &lt;/form&gt;
-    &lt;/div&gt;
-@endsection
-    </pre>
+}</code></pre>
     </div>
 
     <script>
         function copyToClipboard(button) {
+            // Mengambil elemen <pre> atau <code> setelah tombol
             const pre = button.nextElementSibling;
             const text = pre.innerText;
 
             navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
                 button.textContent = "Disalin!";
-                setTimeout(() => button.textContent = "Salin", 1500);
+                button.style.backgroundColor = "#28a745";
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.backgroundColor = "#007BFF";
+                }, 1500);
             }).catch(err => {
                 console.error('Gagal menyalin:', err);
+                alert("Gagal menyalin teks.");
             });
         }
     </script>
 
 </body>
-
 </html>
